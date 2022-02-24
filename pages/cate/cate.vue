@@ -1,5 +1,6 @@
 <template>
   <view>
+    <my-search @click="goToSearch"></my-search>
     <view class="scroll-view-container">
       <scroll-view scroll-y :style="{ height: wh + 'px' }" class="left-scroll">
         <block v-for="(item, i) in cateList" :key="i">
@@ -46,16 +47,21 @@ export default {
     cat_name_handler(i) {
       this.active = i;
       this.cateLevel2 = this.cateList[i].children;
-      this.scrollTop = this.scrollTop ? 0 : 1
+      this.scrollTop = this.scrollTop ? 0 : 0.01;
     },
     goToGoodsList(i) {
       uni.navigateTo({
-        url:'/subpkg/goods_list/goods_list?cid=' + i.cat_id
+        url: '/subpkg/goods_list/goods_list?cid=' + i.cat_id
+      });
+    },
+    goToSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search'
       })
     }
   },
   onLoad() {
-    this.wh = uni.getSystemInfoSync().windowHeight;
+    this.wh = uni.getSystemInfoSync().windowHeight - 50;
     this.getCateList();
   }
 };
@@ -88,27 +94,30 @@ export default {
       }
     }
   }
-  .cat-level2-title {
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    padding: 15px 0;
-  }
-  .cat-level3-list {
-    display: flex;
-    flex-wrap: wrap;
-    .cat-level3-item {
+  .right-scroll {
+    background-color: #ffffff;
+    .cat-level2-title {
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px 0;
+    }
+    .cat-level3-list {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 33.333%;
-      margin-bottom: 10px;
-      image {
-        width: 60px;
-        height: 60px;
-      }
-      text {
-        font-size: 12px;
+      flex-wrap: wrap;
+      .cat-level3-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 33.333%;
+        margin-bottom: 10px;
+        image {
+          width: 60px;
+          height: 60px;
+        }
+        text {
+          font-size: 12px;
+        }
       }
     }
   }
