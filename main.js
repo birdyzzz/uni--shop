@@ -7,7 +7,7 @@ import {
 
 uni.$http = $http
 
-$http.baseUrl = 'https://www.uinav.com'
+$http.baseUrl = 'https://api-hmugo-web.itheima.net'
 
 $http.beforeRequest = function(options) {
   uni.showLoading({
