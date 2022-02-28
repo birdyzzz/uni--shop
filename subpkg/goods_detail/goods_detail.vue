@@ -87,6 +87,10 @@ export default {
         };
         this.addToCart(goods);
       }
+    },
+    async getInfo() {
+      const res = await uni.getSystemInfo();
+      console.log(res);
     }
   },
   computed: {
@@ -107,61 +111,67 @@ export default {
   onLoad(options) {
     const id = options.goods_id;
     this.getGoodsInfo(id);
+    this.getInfo();
   }
 };
 </script>
 
 <style lang="scss">
-swiper {
-  height: 750rpx;
-  image {
-    width: 100%;
-    height: 100%;
-  }
-}
-.goods-info-box {
-  padding: 10px;
-  padding-right: 0;
+page {
+  // padding-bottom: constant(safe-area-inset-bottom);
+  // padding-bottom: env(safe-area-inset-bottom);
 
-  .price {
-    color: #c00000;
-    font-size: 18px;
-    margin: 10px 0;
-  }
-
-  .goods-info-body {
-    display: flex;
-    justify-content: space-between;
-    .goods-name {
-      font-size: 13px;
-      padding-right: 10px;
+  swiper {
+    height: 750rpx;
+    image {
+      width: 100%;
+      height: 100%;
     }
-    // 收藏区域
-    .colect {
-      width: 120px;
-      font-size: 12px;
+  }
+  .goods-info-box {
+    padding: 10px;
+    padding-right: 0;
+
+    .price {
+      color: #c00000;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .goods-info-body {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-left: 1px solid #efefef;
+      justify-content: space-between;
+      .goods-name {
+        font-size: 13px;
+        padding-right: 10px;
+      }
+      // 收藏区域
+      .colect {
+        width: 120px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px solid #efefef;
+        color: gray;
+      }
+    }
+    .express {
+      margin: 10px 0;
+      font-size: 12px;
       color: gray;
     }
   }
-  .express {
-    margin: 10px 0;
-    font-size: 12px;
-    color: gray;
-  }
-}
-.goods-detail-container {
-  padding-bottom: 50px;
-  .goods_nav {
-    // 为商品导航组件添加固定定位
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+  .goods-detail-container {
+    padding-bottom: 50px;
+    .goods_nav {
+      // 为商品导航组件添加固定定位
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 }
 </style>

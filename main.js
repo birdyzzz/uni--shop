@@ -14,6 +14,11 @@ $http.beforeRequest = function(options) {
   uni.showLoading({
     title: '玩儿命加载中!'
   })
+  if (options.url.indexOf('/my') !== -1) {
+    Option.headers = {
+      Authorization: store.state.m_user.token,
+    }
+  }
 }
 $http.beforeRequest = function(options) {
   uni.hideLoading()

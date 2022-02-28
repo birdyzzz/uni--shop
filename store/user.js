@@ -1,8 +1,10 @@
 export default {
   namespaced: true,
   state: () => ({
-    address: JSON.parse(uni.getStorageSync('address') || '{}')
-    
+    address: JSON.parse(uni.getStorageSync('address') || '{}'),
+    token: uni.getStorageSync('token') || '',
+    userInfo: JSON.parse(uni.getStorageSync('userInfo') || '{}'),
+    redirectInfo: JSON.parse(uni.getStorageSync('redirectInfo') || '{}'),
   }),
   mutations: {
     updateAddress(state, address) {
@@ -11,6 +13,23 @@ export default {
     },
     saveToStorage(state) {
       uni.setStorageSync('address', JSON.stringify(state.address))
+    },
+    updateUserInfo(state, info) {
+      state.userInfo = info
+      this.commit('m_user/saveInfoToStorage')
+    },
+    saveInfoToStorage(state) {
+      uni.setStorageSync('userInfo', JSON.stringify(state.userInfo))
+    },
+    updateToken(state, newToken) {
+      state.token = newToken
+      this.commit('m_user/saveTokenToStorage')
+    },
+    saveTokenToStorage(state) {
+      uni.setStorageSync('token', state.token)
+    },
+    updateRedirectInfo(state, info) {
+      state.redirectInfo = info
     }
   },
   getters: {
