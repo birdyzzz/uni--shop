@@ -35,7 +35,7 @@ export default {
     input(e) {
       clearTimeout(this.timer);
       // console.log(e)
-      this.inputVal = e
+      this.inputVal = e;
       this.timer = setTimeout(() => {
         this.keyWord = e;
         this.getSearchResult();
@@ -46,7 +46,7 @@ export default {
       const { data: res } = await uni.$http.get('/api/public/v1/goods/qsearch', { query: this.keyWord });
       if (res.meta.status !== 200) return uni.msg();
       this.searchResult = res.message;
-      this.saveSearchResult()
+      this.saveSearchResult();
     },
     goToDetail(id) {
       uni.navigateTo({
@@ -54,30 +54,30 @@ export default {
       });
     },
     saveSearchResult() {
-      this.history.push(this.keyWord)
-      const set = new Set(this.history)
-      set.delete(this.keyWord)
-      set.add(this.keyWord)
-      this.history = Array.from(set)
-      uni.setStorageSync("keyWord",JSON.stringify(this.history))
+      this.history.push(this.keyWord);
+      const set = new Set(this.history);
+      set.delete(this.keyWord);
+      set.add(this.keyWord);
+      this.history = Array.from(set);
+      uni.setStorageSync('keyWord', JSON.stringify(this.history));
     },
     cancelSearch() {
-      this.searchResult = []
+      this.searchResult = [];
     },
     clearHistory() {
-      uni.setStorageSync('keyWord', '[]')
+      uni.setStorageSync('keyWord', '[]');
     },
     tapHistory(kw) {
-      this.input(kw)
+      this.input(kw);
     }
   },
   computed: {
     historys() {
-      return [...this.history].reverse()
+      return [...this.history].reverse();
     }
   },
   onLoad() {
-    this.history = JSON.parse(uni.getStorageSync('keyWord' || '[]'))
+    this.history = JSON.parse(uni.getStorageSync('keyWord' || '[]'));
   }
 };
 </script>

@@ -1,8 +1,6 @@
 <template>
   <view>
-    <view class="search-container">
-      <my-search @click="goToSearch"></my-search>
-    </view>
+    <view class="search-container"><my-search @click="goToSearch"></my-search></view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :indicator-active-color="white">
       <swiper-item v-for="(item, i) in swiperList" :key="i">
         <navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id"><image :src="item.image_src"></image></navigator>
@@ -21,7 +19,9 @@
         <!-- 楼层图片区域 -->
         <view class="floor-img-box">
           <!-- 左侧 -->
-          <navigator class="left-img-box" :url="item.product_list[0].url"><image :src="item.product_list[0].image_src" :style="{ width: item.product_list[0].image_width + 'rpx' }"></image></navigator>
+          <navigator class="left-img-box" :url="item.product_list[0].url">
+            <image :src="item.product_list[0].image_src" :style="{ width: item.product_list[0].image_width + 'rpx' }"></image>
+          </navigator>
           <!-- 右侧 -->
           <view class="right-img-box">
             <navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 !== 0" :url="item2.url">
@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import cartBadge from '@/mixins/tabbar-badge.js';
 export default {
+  mixins: [cartBadge],
   data() {
     return {
       swiperList: [],
@@ -74,7 +76,7 @@ export default {
     goToSearch() {
       uni.navigateTo({
         url: '/subpkg/search/search'
-      })
+      });
     }
   },
   onLoad() {

@@ -26,7 +26,9 @@
 </template>
 
 <script>
+import cartBadge from '@/mixins/tabbar-badge.js';
 export default {
+  mixins: [cartBadge],
   data() {
     return {
       wh: 0,
@@ -57,7 +59,7 @@ export default {
     goToSearch() {
       uni.navigateTo({
         url: '/subpkg/search/search'
-      })
+      });
     }
   },
   onLoad() {
